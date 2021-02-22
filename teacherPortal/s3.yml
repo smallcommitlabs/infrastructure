@@ -8,6 +8,7 @@ Parameters: # params passed to "--parameter-overrides" in CLI
   BucketName:
     Description: Unique name for your bucket. This will be in the S3 url to your React app.
     Type: String
+    Default: "TeacherPortal"
 
 Resources:
   # Create an S3 Bucket that serves a static website (i.e. React app)
