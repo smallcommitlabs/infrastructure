@@ -50,6 +50,7 @@ Resources:
     Properties:
       UserPoolId: !Ref TeacherCognitoUserPool
       ClientName: !Join ['-', [!Ref UserPoolName, 'TeacherPortalApp']]
+      PreventUserExistenceErrors: 'ENABLED'
   
 Outputs:
   WebsiteURL:
