@@ -44,10 +44,20 @@ Resources:
       AdminCreateUserConfig:
         AllowAdminCreateUserOnly: True #Only admin is allowed to create users. (This supports the current behaviour that teachers cant sign themselves up)
 
+  #
+  TeacherUserPoolPortalAppClient:
+    Type: AWS::Cognito::UserPoolClient
+    Properties:
+      UserPoolId: !Ref TeacherCognitoUserPool
+      ClientName: !Join ['-', [!Ref UserPoolName, 'TeacherPortalApp']]
+  
 Outputs:
   WebsiteURL:
     Value: !GetAtt WebsiteBucket.WebsiteURL
     Description: URL for website hosted on S3
-  UserPoolARN:
-    Value: !GetAtt TeacherCognitoUserPool.Arn
-    Description: ARN for the user pool
+  UserPoolID:
+    Value: !Ref TeacherCognitoUserPool
+    Description: ID for the user pool
+  PortalAppClientID:
+    Value: !Ref TeacherUserPoolPortalAppClient
+    Description: ID for the client for the portal app for the teacher user pool
