@@ -48,6 +48,6 @@ Outputs:
   WebsiteURL:
     Value: !GetAtt WebsiteBucket.WebsiteURL
     Description: URL for website hosted on S3
-  WebsiteURL:
+  UserPoolARN:
     Value: !GetAtt TeacherCognitoUserPool.Arn
     Description: ARN for the user pool
