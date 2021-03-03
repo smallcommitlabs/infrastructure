@@ -1,0 +1,14 @@
+[
+    {
+        "ParameterKey": "EnvironmentName",
+        "ParameterValue": "#{Scope}"
+    },
+    {
+        "ParameterKey": "ApplicationName",
+        "ParameterValue": "#{ApplicationName}"
+    },
+    {
+        "ParameterKey": "PackageName",
+        "ParameterValue": "#{PackageName}"
+    }
+]
