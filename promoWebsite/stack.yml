@@ -13,8 +13,8 @@ Resources:
       BucketName: !Ref BucketName
       AccessControl: PublicRead # visitors need to be able to access the sie
       WebsiteConfiguration: # this makes the S3 Bucket a static website/app
-        IndexDocument: index.html # default object served when visiting S3 domain
-        ErrorDocument: 404.html # just send to app, let React handle errors and routing
+        IndexDocument: index.html
+        ErrorDocument: 404.html
 
   # Add a Bucket Policy that lets public visitors access the web app
   MyBucketPolicy:
