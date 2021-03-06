@@ -38,9 +38,9 @@ Resources:
         IPV6Enabled: true
         Enabled: true
         Origins:
-          - customOriginConfig: 
-                Id: !Join ['', [!Ref BucketName, '-distribution']]
-                DomainName: !GetAtt MyBucket.WebsiteURL
+          - Id: !Join ['', [!Ref BucketName, '-distribution']]
+            DomainName: !GetAtt MyBucket.WebsiteURL 
+            customOriginConfig: 
                 OriginProtocolPolicy: https-only
                 OriginSSLProtocols: 
                   - TLSv1
