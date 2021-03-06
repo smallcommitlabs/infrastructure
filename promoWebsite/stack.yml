@@ -4,6 +4,8 @@ Parameters:
   BucketName:
     Description: Name of the bucket to create
     Type: String
+  Scope:
+    Description: The scope of the resource (test/prod)
 
 Resources:
   # Create an S3 Bucket that serves a static website (i.e. React app)
@@ -38,14 +40,14 @@ Resources:
         IPV6Enabled: true
         Enabled: true
         Origins:
-          - Id: !Join ['', [!Ref BucketName, '-distribution']]
+          - Id: s3BucketOrigin
             DomainName: !GetAtt MyBucket.WebsiteURL 
             CustomOriginConfig: 
                 OriginProtocolPolicy: https-only
                 OriginSSLProtocols: 
                   - TLSv1
         DefaultCacheBehavior:
-          TargetOriginId: !Join ['', [!Ref BucketName, '-distribution']]
+          TargetOriginId: s3BucketOrigin
           ViewerProtocolPolicy: redirect-to-https
 
         PriceClass: PriceClass_All
