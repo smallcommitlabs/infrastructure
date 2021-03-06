@@ -68,7 +68,7 @@ Resources:
         Enabled: true
         Origins:
           - Id: !Ref BucketName
-            DomainName: !Select [1, !Split ["//", !GetAtt MyBucket.WebsiteURL]]
+            DomainName: !Select [1, !Split ["//", !GetAtt WebsiteBucket.WebsiteURL]]
             CustomOriginConfig: 
                 OriginProtocolPolicy: match-viewer
         DefaultCacheBehavior:
