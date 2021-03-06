@@ -58,5 +58,5 @@ Resources:
         ViewerCertificate:
           AcmCertificateArn: !Ref CertificateARN
           MinimumProtocolVersion: TLSv1
-          SSLSupportMethod: sni-only
+          SslSupportMethod: sni-only
         PriceClass: PriceClass_All
