@@ -30,11 +30,29 @@ Resources:
             Principal: '*' # wildcard, allow all requests
             Action: 's3:GetObject'
             Resource: !Join ['', ['arn:aws:s3:::', !Ref MyBucket, /*]]
+
+  cloudfrontCachePolicy:
+    Type: AWS::CloudFront::CachePolicy
+    Properties: 
+      CachePolicyConfig: 
+        DefaultTTL: 86400 
+        MaxTTL: 31536000 
+        MinTTL: 0
+        Name: !Join ['', [!Ref BucketName, '-cachePolicy']]
+        ParametersInCacheKeyAndForwardedToOrigin:
+          CookiesConfig:
+            CookieBehavior: none
+          EnableAcceptEncodingGzip: false
+          HeadersConfig:
+            HeaderBehavior: none
+          QueryStringsConfig:
+            QueryStringBehavior: none 
   
   cloudfrontDistribution:
     Type: AWS::CloudFront::Distribution
     Properties:
       DistributionConfig:
+        DefaultRootObject: 'index.html'
         IPV6Enabled: true
         Enabled: true
         Origins:
@@ -45,6 +63,7 @@ Resources:
                 OriginSSLProtocols: 
                   - TLSv1
         DefaultCacheBehavior:
+          CachePolicyId: cloudfrontCachePolicy
           TargetOriginId: s3BucketOrigin
           ViewerProtocolPolicy: redirect-to-https
 
