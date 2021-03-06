@@ -70,7 +70,7 @@ Resources:
           - Id: !Ref BucketName
             DomainName: !Select [1, !Split ["//", !GetAtt WebsiteBucket.WebsiteURL]]
             CustomOriginConfig: 
-                OriginProtocolPolicy: match-viewer
+                OriginProtocolPolicy: http-only
         DefaultCacheBehavior:
           ForwardedValues:
             QueryString: false
