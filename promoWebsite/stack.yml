@@ -40,7 +40,7 @@ Resources:
         Origins:
           - Id: !Join ['', [!Ref BucketName, '-distribution']]
             DomainName: !GetAtt MyBucket.WebsiteURL 
-            customOriginConfig: 
+            CustomOriginConfig: 
                 OriginProtocolPolicy: https-only
                 OriginSSLProtocols: 
                   - TLSv1
