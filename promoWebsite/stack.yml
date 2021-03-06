@@ -30,3 +30,19 @@ Resources:
             Principal: '*' # wildcard, allow all requests
             Action: 's3:GetObject'
             Resource: !Join ['', ['arn:aws:s3:::', !Ref MyBucket, /*]]
+  
+  cloudfrontDistribution:
+    Type: AWS::CloudFront::Distribution
+    Properties:
+      DistributionConfig:
+        IPV6Enabled: true
+        Origins:
+          -   
+          CustomOriginConfig: 
+                Id: !Join ['', [!Ref BucketName, '-distribution']]
+                DomainName: !GetAtt MyBucket.WebsiteURL
+                OriginProtocolPolicy: https-only
+                OriginSSLProtocols: 
+                  - TLSv1
+
+        PriceClass: PriceClass_All
