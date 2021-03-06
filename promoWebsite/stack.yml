@@ -47,9 +47,7 @@ Resources:
                   - TLSv1
         DefaultCacheBehavior:
           ForwardedValues:
-            QueryString: none
-            Cookies:
-              Forward: none
+            QueryString: false
           TargetOriginId: s3BucketOrigin
           ViewerProtocolPolicy: redirect-to-https
 
