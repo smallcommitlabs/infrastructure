@@ -39,7 +39,7 @@ Resources:
         Enabled: true
         Origins:
           - Id: s3BucketOrigin
-            DomainName: !GetAtt MyBucket.WebsiteURL 
+            DomainName: !Select [1, !Split ["//", !GetAtt MyBucket.WebsiteURL]]
             CustomOriginConfig: 
                 OriginProtocolPolicy: https-only
                 OriginSSLProtocols: 
