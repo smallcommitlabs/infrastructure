@@ -2,5 +2,9 @@
     {
         "ParameterKey": "BucketName",
         "ParameterValue": "#{BucketName}"
+    },
+    {
+        "ParameterKey": "CertificateARN",
+        "ParameterValue": "#{CertificateARN}"
     }
 ]

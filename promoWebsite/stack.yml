@@ -4,6 +4,9 @@ Parameters:
   BucketName:
     Description: Name of the bucket to create
     Type: String
+  CertificateARN:
+    Description: ARN of the certificate
+    Type: String
 
 Resources:
   # Create an S3 Bucket that serves a static website (i.e. React app)
@@ -35,6 +38,8 @@ Resources:
     Type: AWS::CloudFront::Distribution
     Properties:
       DistributionConfig:
+        Aliases:
+          - 'test.spellcards.nz'
         DefaultRootObject: 'index.html'
         IPV6Enabled: true
         Enabled: true
@@ -50,5 +55,8 @@ Resources:
             QueryString: false
           TargetOriginId: s3BucketOrigin
           ViewerProtocolPolicy: redirect-to-https
-
+        ViewerCertificate:
+          AcmCertificateArn: !Ref CertificateARN
+          MinimumProtocolVersion: TLSv1
+          SSLSupportMethod: sni-only
         PriceClass: PriceClass_All
