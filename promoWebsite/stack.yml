@@ -44,5 +44,8 @@ Resources:
                 OriginProtocolPolicy: https-only
                 OriginSSLProtocols: 
                   - TLSv1
+        DefaultCacheBehavior:
+          TargetOriginId: !Join ['', [!Ref BucketName, '-distribution']]
+          ViewerProtocolPolicy: redirect-to-https
 
         PriceClass: PriceClass_All
