@@ -6,5 +6,9 @@
     {
         "ParameterKey": "CertificateARN",
         "ParameterValue": "#{CertificateARN}"
+    },
+    {
+        "ParameterKey": "Alias",
+        "ParameterValue": "#{WebsiteDomain}"
     }
 ]

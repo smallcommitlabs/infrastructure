@@ -7,6 +7,10 @@ Parameters:
   CertificateARN:
     Description: ARN of the certificate
     Type: String
+  Alias:
+    Description: custom domain name
+    Type: String
+
 
 Resources:
   # Create an S3 Bucket that serves a static website (i.e. React app)
@@ -39,8 +43,7 @@ Resources:
     Properties:
       DistributionConfig:
         Aliases:
-          - 'test.spellcards.nz'
-        DefaultRootObject: 'index.html'
+          - !Ref Alias
         IPV6Enabled: true
         Enabled: true
         Origins:
