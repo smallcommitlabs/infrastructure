@@ -4,8 +4,6 @@ Parameters:
   BucketName:
     Description: Name of the bucket to create
     Type: String
-  Scope:
-    Description: The scope of the resource (test/prod)
 
 Resources:
   # Create an S3 Bucket that serves a static website (i.e. React app)
