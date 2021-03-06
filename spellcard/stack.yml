@@ -4,6 +4,12 @@ Parameters:
   BucketName:
     Description: Name of the bucket to create
     Type: String
+  CertificateARN:
+    Description: ARN of the certificate
+    Type: String
+  Alias:
+    Description: custom domain name
+    Type: String
 
 Resources:
   # Create an S3 Bucket that serves a static website (i.e. React app)
@@ -30,3 +36,27 @@ Resources:
             Principal: '*' # wildcard, allow all requests
             Action: 's3:GetObject'
             Resource: !Join ['', ['arn:aws:s3:::', !Ref MyBucket, /*]]
+  
+  CloudfrontDistribution:
+    Type: AWS::CloudFront::Distribution
+    Properties:
+      DistributionConfig:
+        Aliases:
+          - !Ref Alias
+        IPV6Enabled: true
+        Enabled: true
+        Origins:
+          - Id: !Ref BucketName
+            DomainName: !Select [1, !Split ["//", !GetAtt MyBucket.WebsiteURL]]
+            CustomOriginConfig: 
+                OriginProtocolPolicy: match-viewer
+        DefaultCacheBehavior:
+          ForwardedValues:
+            QueryString: false
+          TargetOriginId: !Ref BucketName
+          ViewerProtocolPolicy: redirect-to-https
+        ViewerCertificate:
+          AcmCertificateArn: !Ref CertificateARN
+          MinimumProtocolVersion: TLSv1
+          SslSupportMethod: sni-only
+        PriceClass: PriceClass_All

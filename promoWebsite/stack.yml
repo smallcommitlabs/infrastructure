@@ -61,3 +61,8 @@ Resources:
           MinimumProtocolVersion: TLSv1
           SslSupportMethod: sni-only
         PriceClass: PriceClass_All
+
+Outputs:
+  CloudfrontID:
+    Value: !Ref cloudfrontDistribution
+    Description: ID for the cloudfront distribution

@@ -2,5 +2,13 @@
     {
         "ParameterKey": "BucketName",
         "ParameterValue": "#{BucketName}"
+    },
+    {
+        "ParameterKey": "CertificateARN",
+        "ParameterValue": "#{CertificateARN}"
+    },
+    {
+        "ParameterKey": "Alias",
+        "ParameterValue": "#{WebsiteDomain}"
     }
 ]

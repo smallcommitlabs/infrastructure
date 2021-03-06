@@ -6,5 +6,13 @@
     {
         "ParameterKey": "UserPoolName",
         "ParameterValue": "#{UserPoolName}"
+    },
+    {
+        "ParameterKey": "CertificateARN",
+        "ParameterValue": "#{CertificateARN}"
+    },
+    {
+        "ParameterKey": "Alias",
+        "ParameterValue": "#{WebsiteDomain}"
     }
 ]

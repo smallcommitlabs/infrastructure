@@ -9,6 +9,12 @@ Parameters: # params passed to "--parameter-overrides" in CLI
   UserPoolName:
     Description: Unique name for the cognito user pool.
     Type: String
+  CertificateARN:
+    Description: ARN of the certificate
+    Type: String
+  Alias:
+    Description: custom domain name
+    Type: String
 
 Resources:
   # Create an S3 Bucket that serves a static website (i.e. React app)
@@ -52,6 +58,30 @@ Resources:
       ClientName: !Join ['-', [!Ref UserPoolName, 'TeacherPortalApp']]
       PreventUserExistenceErrors: 'ENABLED'
   
+  CloudfrontDistribution:
+    Type: AWS::CloudFront::Distribution
+    Properties:
+      DistributionConfig:
+        Aliases:
+          - !Ref Alias
+        IPV6Enabled: true
+        Enabled: true
+        Origins:
+          - Id: !Ref BucketName
+            DomainName: !Select [1, !Split ["//", !GetAtt MyBucket.WebsiteURL]]
+            CustomOriginConfig: 
+                OriginProtocolPolicy: match-viewer
+        DefaultCacheBehavior:
+          ForwardedValues:
+            QueryString: false
+          TargetOriginId: !Ref BucketName
+          ViewerProtocolPolicy: redirect-to-https
+        ViewerCertificate:
+          AcmCertificateArn: !Ref CertificateARN
+          MinimumProtocolVersion: TLSv1
+          SslSupportMethod: sni-only
+        PriceClass: PriceClass_All
+
 Outputs:
   WebsiteURL:
     Value: !GetAtt WebsiteBucket.WebsiteURL
@@ -62,3 +92,6 @@ Outputs:
   PortalAppClientID:
     Value: !Ref TeacherUserPoolPortalAppClient
     Description: ID for the client for the portal app for the teacher user pool
+  CloudfrontID:
+    Value: !Ref CloudfrontDistribution
+    Description: ID for the cloudfront distribution
