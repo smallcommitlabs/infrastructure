@@ -44,16 +44,14 @@ Resources:
         IPV6Enabled: true
         Enabled: true
         Origins:
-          - Id: s3BucketOrigin
+          - Id: !Ref BucketName
             DomainName: !Select [1, !Split ["//", !GetAtt MyBucket.WebsiteURL]]
             CustomOriginConfig: 
-                OriginProtocolPolicy: https-only
-                OriginSSLProtocols: 
-                  - TLSv1
+                OriginProtocolPolicy: match-viewer
         DefaultCacheBehavior:
           ForwardedValues:
             QueryString: false
-          TargetOriginId: s3BucketOrigin
+          TargetOriginId: !Ref BucketName
           ViewerProtocolPolicy: redirect-to-https
         ViewerCertificate:
           AcmCertificateArn: !Ref CertificateARN
